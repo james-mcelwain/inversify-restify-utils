@@ -1,5 +1,6 @@
 import * as inversify from "inversify";
 import * as restify from "restify";
+import * as errors from "restify-errors";
 import interfaces from "./interfaces";
 import { TYPE, METADATA_KEY } from "./constants";
 
@@ -90,7 +91,7 @@ export class InversifyRestifyServer  {
                     }
                 })
                     .catch((error: any) => {
-                        next(new Error(error));
+                        next(new errors.InternalServerError(error));
                     });
 
             } else if (result && !res.headersSent) {
